@@ -14,6 +14,15 @@
 		C1C64E932A715D7F00FAA106 /* ForestTroubleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C64E922A715D7F00FAA106 /* ForestTroubleTests.swift */; };
 		C1C64E9D2A715D7F00FAA106 /* ForestTroubleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C64E9C2A715D7F00FAA106 /* ForestTroubleUITests.swift */; };
 		C1C64E9F2A715D7F00FAA106 /* ForestTroubleUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C64E9E2A715D7F00FAA106 /* ForestTroubleUITestsLaunchTests.swift */; };
+		C1C64EAD2A72928700FAA106 /* pixelart.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C1C64EAC2A72928700FAA106 /* pixelart.ttf */; };
+		C1C64EB12A72954F00FAA106 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C64EB02A72954F00FAA106 /* GameScene.swift */; };
+		C1C64EB42A72A7AE00FAA106 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C64EB32A72A7AE00FAA106 /* Character.swift */; };
+		C1C64EB72A73DDBC00FAA106 /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C64EB62A73DDBC00FAA106 /* Page.swift */; };
+		C1C64EB92A73E36000FAA106 /* PageScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C64EB82A73E36000FAA106 /* PageScene.swift */; };
+		C1C64EBB2A75AAAB00FAA106 /* CombatResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C64EBA2A75AAAB00FAA106 /* CombatResources.swift */; };
+		C1C64EBD2A76E37D00FAA106 /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C64EBC2A76E37D00FAA106 /* Enemy.swift */; };
+		C1C64EBF2A76E3D500FAA106 /* Goblin.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C64EBE2A76E3D500FAA106 /* Goblin.swift */; };
+		C1C64EC12A76E47900FAA106 /* Orc.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C64EC02A76E47900FAA106 /* Orc.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +53,16 @@
 		C1C64E982A715D7F00FAA106 /* ForestTroubleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ForestTroubleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1C64E9C2A715D7F00FAA106 /* ForestTroubleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForestTroubleUITests.swift; sourceTree = "<group>"; };
 		C1C64E9E2A715D7F00FAA106 /* ForestTroubleUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForestTroubleUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		C1C64EAC2A72928700FAA106 /* pixelart.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = pixelart.ttf; sourceTree = "<group>"; };
+		C1C64EAE2A7292B900FAA106 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		C1C64EB02A72954F00FAA106 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		C1C64EB32A72A7AE00FAA106 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
+		C1C64EB62A73DDBC00FAA106 /* Page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
+		C1C64EB82A73E36000FAA106 /* PageScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageScene.swift; sourceTree = "<group>"; };
+		C1C64EBA2A75AAAB00FAA106 /* CombatResources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombatResources.swift; sourceTree = "<group>"; };
+		C1C64EBC2A76E37D00FAA106 /* Enemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
+		C1C64EBE2A76E3D500FAA106 /* Goblin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goblin.swift; sourceTree = "<group>"; };
+		C1C64EC02A76E47900FAA106 /* Orc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Orc.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +113,11 @@
 		C1C64E802A715D7E00FAA106 /* ForestTrouble */ = {
 			isa = PBXGroup;
 			children = (
+				C1C64EB52A73DDAC00FAA106 /* Model */,
+				C1C64EB22A72A7A100FAA106 /* Engine */,
+				C1C64EAF2A72954200FAA106 /* Scenes */,
+				C1C64EAE2A7292B900FAA106 /* Info.plist */,
+				C1C64EAB2A72925600FAA106 /* fonts */,
 				C1C64E812A715D7E00FAA106 /* ForestTroubleApp.swift */,
 				C1C64E832A715D7E00FAA106 /* ContentView.swift */,
 				C1C64E852A715D7F00FAA106 /* Assets.xcassets */,
@@ -125,6 +149,43 @@
 				C1C64E9E2A715D7F00FAA106 /* ForestTroubleUITestsLaunchTests.swift */,
 			);
 			path = ForestTroubleUITests;
+			sourceTree = "<group>";
+		};
+		C1C64EAB2A72925600FAA106 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				C1C64EAC2A72928700FAA106 /* pixelart.ttf */,
+			);
+			path = fonts;
+			sourceTree = "<group>";
+		};
+		C1C64EAF2A72954200FAA106 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				C1C64EB02A72954F00FAA106 /* GameScene.swift */,
+				C1C64EB82A73E36000FAA106 /* PageScene.swift */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		C1C64EB22A72A7A100FAA106 /* Engine */ = {
+			isa = PBXGroup;
+			children = (
+				C1C64EB32A72A7AE00FAA106 /* Character.swift */,
+			);
+			path = Engine;
+			sourceTree = "<group>";
+		};
+		C1C64EB52A73DDAC00FAA106 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C1C64EB62A73DDBC00FAA106 /* Page.swift */,
+				C1C64EBA2A75AAAB00FAA106 /* CombatResources.swift */,
+				C1C64EBC2A76E37D00FAA106 /* Enemy.swift */,
+				C1C64EBE2A76E3D500FAA106 /* Goblin.swift */,
+				C1C64EC02A76E47900FAA106 /* Orc.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,6 +294,7 @@
 			files = (
 				C1C64E892A715D7F00FAA106 /* Preview Assets.xcassets in Resources */,
 				C1C64E862A715D7F00FAA106 /* Assets.xcassets in Resources */,
+				C1C64EAD2A72928700FAA106 /* pixelart.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,8 +319,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1C64EB12A72954F00FAA106 /* GameScene.swift in Sources */,
+				C1C64EBB2A75AAAB00FAA106 /* CombatResources.swift in Sources */,
 				C1C64E842A715D7E00FAA106 /* ContentView.swift in Sources */,
 				C1C64E822A715D7E00FAA106 /* ForestTroubleApp.swift in Sources */,
+				C1C64EBD2A76E37D00FAA106 /* Enemy.swift in Sources */,
+				C1C64EB42A72A7AE00FAA106 /* Character.swift in Sources */,
+				C1C64EBF2A76E3D500FAA106 /* Goblin.swift in Sources */,
+				C1C64EB72A73DDBC00FAA106 /* Page.swift in Sources */,
+				C1C64EC12A76E47900FAA106 /* Orc.swift in Sources */,
+				C1C64EB92A73E36000FAA106 /* PageScene.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -420,6 +490,7 @@
 				DEVELOPMENT_TEAM = 7P886DJU8X;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ForestTrouble/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -449,6 +520,7 @@
 				DEVELOPMENT_TEAM = 7P886DJU8X;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ForestTrouble/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
