@@ -9,12 +9,20 @@ import Foundation
 class Orc: Enemy {
     override init() {
         super.init()
-        self.type = "Orc"
+        self.type = "orc"
         self.life = 15
+        self.sprite.size = CGSize(width: 130, height: 130)
     }
     
-    func getDamange() -> Int {
-        var rand: Int = Int.random(in: 1..<5)
-        return (rand == 5 ? 3 : rand > 2 ? 2 : 1)
+    override func getDamage() -> Int {
+        var rand: Int = Int.random(in: 1..<6)
+        switch rand {
+        case 5:
+            return 3
+        case 4:
+            return 2
+        default:
+            return 1
+        }
     }
 }

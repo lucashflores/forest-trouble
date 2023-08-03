@@ -18,4 +18,8 @@ class Enemy {
         self.life = 0
         self.sprite = SKSpriteNode()
     }
+    
+    func getDamage() -> Int {
+        return 0
+    }
 }

@@ -21,16 +21,17 @@ class PageScene: SKScene {
     var currentPage: Page?
     var pageIndex: Int = 0
     var enemies: [Enemy] = []
+    var hasBomb: Bool = false
 
 
     override func didMove(to view: SKView) {
-        let backGroundTexture = SKTexture(imageNamed: "wood")
+        let backGroundTexture = SKTexture(imageNamed: "bg")
         backGround.position = CGPoint(x: size.width/2, y: size.height/2)
         backGround.size = CGSize(width: size.width, height: size.height)
         backGround.texture = backGroundTexture
         addChild(backGround)
         self.pages = Page.getPages()
-        self.currentPage = self.pages?.first(where: {$0.id == "goblin-fight"})
+        self.currentPage = self.pages?.first(where: {$0.id == "intro1"})
         loadBook()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.loadAssets()
@@ -39,7 +40,7 @@ class PageScene: SKScene {
     }
     
     func loadFirstButton() {
-        let firstButtonTexture = SKTexture(imageNamed: self.currentPage!.firstButton)
+        let firstButtonTexture = SKTexture(imageNamed: self.hasBomb && self.currentPage!.id == "orc-fight" ? "use_bomb_button" : self.currentPage!.firstButton)
         firstButton.texture = firstButtonTexture
         firstButton.name = "First Button"
         firstButton.anchorPoint = CGPoint(x: 0, y: 0)
@@ -48,7 +49,7 @@ class PageScene: SKScene {
             firstButton.position = CGPoint(x: 215, y: 160)
         }
         else {
-            firstButton.position = CGPoint(x: 215, y: 120)
+            firstButton.position = CGPoint(x: 215, y: 110)
         }
         
         firstButton.size.width = 140
@@ -85,9 +86,9 @@ class PageScene: SKScene {
         illustration.anchorPoint = CGPoint(x: 0, y: 0)
         illustration.position = CGPoint(x: size.width/2 + 50 , y: size.height/2 - 90)
         if (self.enemies.count > 0) {
-            illustration.position = CGPoint(x: 220, y: 180)
-            illustration.size.width = 120
-            illustration.size.height = 120
+            illustration.position = CGPoint(x: 210, y: 180)
+            illustration.size.width = 150
+            illustration.size.height = 150
         }
         illustration.alpha = 0
         addChild(illustration)
@@ -95,13 +96,13 @@ class PageScene: SKScene {
 
     func loadText() {
         textContent.text = self.currentPage!.textContent
-        textContent.fontSize = 16
+        textContent.fontSize = 15
         textContent.fontColor = UIColor(named: "bookText")
         textContent.alpha = 0
         textContent.horizontalAlignmentMode = .left
         textContent.verticalAlignmentMode = .top
         textContent.position = CGPoint(x: 165, y: 315)
-        textContent.preferredMaxLayoutWidth = 260
+        textContent.preferredMaxLayoutWidth = 245
         textContent.numberOfLines = 10
         addChild(textContent)
 
@@ -110,19 +111,12 @@ class PageScene: SKScene {
     func loadEnemies() {
         var index = 0
         self.enemies = self.currentPage?.combatResources?.enemies ?? []
-        let enemyCount = self.enemies.count
         for enemy in self.enemies {
             let texture = SKTexture(imageNamed: "\(enemy.type)-\(enemy.life)-life")
             enemy.sprite.texture = texture
             enemy.sprite.anchorPoint = CGPoint(x: 0, y: 0)
-            if (enemyCount == 1) {
-                enemy.sprite.size = CGSize(width: 150, height: 150)
-                enemy.sprite.position = CGPoint(x: size.width/2 + 50, y: size.height/2 - 90)
-            }
-            else {
-                enemy.sprite.size = CGSize(width: 100, height: 100)
-                enemy.sprite.position = CGPoint(x: size.width/2 + 100, y: CGFloat(230 - index*80))
-            }
+            enemy.sprite.size = CGSize(width: 100, height: 100)
+            enemy.sprite.position = CGPoint(x: size.width/2 + 100, y: CGFloat(230 - index*80))
             index += 1
             enemy.sprite.alpha = 0
             addChild(enemy.sprite)
@@ -156,13 +150,22 @@ class PageScene: SKScene {
     }
 
     func nextPage() {
+        if(currentPage?.id == "intro1") {
+            self.charLife = 15
+            self.hasBomb = false
+            self.pages = Page.getPages()
+        }
+        if(currentPage?.id == "goblin-fight-win") {
+            self.hasBomb = true
+        }
         let isCombat = self.currentPage?.combatResources?.enemies.count ?? 0 > 0
         isAnimating = true
+        self.fadeAssetsOut()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
             if (!isCombat) {
                 self.animateBook()
             }
-            self.fadeAssetsOut()
+            
             self.removeAssets()
             DispatchQueue.main.asyncAfter(deadline: .now() + 7*0.06) {
                 self.isAnimating = false
@@ -233,6 +236,25 @@ class PageScene: SKScene {
                                                      timePerFrame: 0.1)
         return dieAnimation
     }
+    
+    func getDie() -> SKSpriteNode {
+        let die = SKSpriteNode()
+        die.anchorPoint = CGPoint(x: 0, y: 0)
+        die.size = CGSize(width: 25, height: 25)
+        die.position = CGPoint(x: 270, y: 80)
+        die.texture = SKTexture(imageNamed: "die-1")
+        
+        return die
+    }
+    
+    func getDamageText(damage: Int) -> SKLabelNode {
+        let damageText = SKLabelNode(fontNamed: "Pixel-Art")
+        damageText.fontColor = UIColor(named: "bookText")
+        damageText.fontSize = 11
+        damageText.position = CGPoint(x: 285, y: 150)
+        damageText.text = "You took \(damage) damage!"
+        return damageText
+    }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
@@ -244,20 +266,28 @@ class PageScene: SKScene {
                     if (node.name == "First Button") {
                         if (self.enemies.count > 0) {
                             let rand = Int.random(in: 1..<7)
-                            let die = SKSpriteNode()
-                            die.anchorPoint = CGPoint(x: 0, y: 0)
-                            die.size = CGSize(width: 25, height: 25)
-                            die.position = CGPoint(x: 270, y: 80)
-                            die.texture = SKTexture(imageNamed: "die-1")
-                            self.addChild(die)
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                                die.run(self.createDieAnimation(number: rand))
+                            let die = self.getDie()
+                            if (!self.hasBomb) {
+                                self.addChild(die)
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                                    die.run(self.createDieAnimation(number: rand))
+                                }
                             }
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                die.removeFromParent()
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
                                 var damageToApply = rand
+                                if (!self.hasBomb) {
+                                    die.removeFromParent()
+                                    
+                                } else {
+                                    damageToApply = 12
+                                    self.hasBomb = false
+                                }
                                 var enemiesLife = 0
+                                var enemiesDamage = 0
                                 for enemy in self.currentPage!.combatResources!.enemies {
+                                    if (enemy.life > 0) {
+                                        enemiesDamage += enemy.getDamage()
+                                    }
                                     if (enemy.life - damageToApply < 0) {
                                         damageToApply -= enemy.life
                                         enemy.life = 0
@@ -266,14 +296,26 @@ class PageScene: SKScene {
                                         damageToApply -= damageToApply
                                     }
                                     enemiesLife += enemy.life
+                                    
                                 }
-                                if (enemiesLife == 0) {
-                                    self.currentPage = self.pages?.first(where: {$0.id == self.currentPage?.secondDestination})
+                                if (self.charLife < enemiesDamage) {
+                                    self.charLife = 0
                                 }
-                                else if (self.charLife == 0) {
-                                    self.currentPage = self.pages?.first(where: {$0.id == self.currentPage?.firstDestination})
+                                else {
+                                    self.charLife -= enemiesDamage
                                 }
-                                self.nextPage()
+                                let damageText = self.getDamageText(damage: enemiesDamage)
+                                self.addChild(damageText)
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                    damageText.removeFromParent()
+                                    if (self.charLife == 0) {
+                                        self.currentPage = self.pages?.first(where: {$0.id == self.currentPage?.firstDestination})
+                                    }
+                                    else if (enemiesLife == 0) {
+                                        self.currentPage = self.pages?.first(where: {$0.id == self.currentPage?.secondDestination})
+                                    }
+                                    self.nextPage()
+                                }
                             }
                         }
                         else {

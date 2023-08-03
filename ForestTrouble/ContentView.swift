@@ -19,7 +19,7 @@ struct ContentView: View {
 
     var body: some View {
         ZStack {
-            Image("wood")
+            Image("bg")
                 .resizable()
                 .ignoresSafeArea()
             SpriteView(scene: scene)
